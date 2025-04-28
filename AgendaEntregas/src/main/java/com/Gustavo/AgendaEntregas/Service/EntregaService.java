@@ -33,6 +33,7 @@ public Entrega update(Long id, Entrega novaentrega){
   oldEntrega.setEndereco(novaentrega.getEndereco());
   oldEntrega.setNomeCliente(novaentrega.getNomeCliente());
   oldEntrega.setNumeroCliente(novaentrega.getNumeroCliente());
+  oldEntrega.setItems(novaentrega.getItems());
   return repository.save(oldEntrega);
 }
 

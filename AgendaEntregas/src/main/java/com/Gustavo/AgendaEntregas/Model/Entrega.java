@@ -11,11 +11,12 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table
+@Table(name = "Entrega")
 @Getter
 @Setter
 public class Entrega implements Serializable {
-private static final long SerialVersionUID = 1L;
+
+    private static final long SerialVersionUID = 1L;
 
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +34,12 @@ private String endereco;
 @Column(name = "dataEntrega", nullable = false)
 @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 private LocalDateTime dataEntrega;
+
+@Column(name = "items", nullable = false)
+private String items;
+
+
+
 
 public Entrega() {
     }
