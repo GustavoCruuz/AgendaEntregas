@@ -3,6 +3,9 @@ package com.Gustavo.AgendaEntregas.Service;
 import com.Gustavo.AgendaEntregas.Exception.ResourceNotFoundException;
 import com.Gustavo.AgendaEntregas.Model.Entrega;
 import com.Gustavo.AgendaEntregas.Repository.EntregaRepository;
+import com.Gustavo.AgendaEntregas.data.dto.EntregaDTO;
+import static com.Gustavo.AgendaEntregas.mapper.ObjectMapper.parseListObjects;
+import static com.Gustavo.AgendaEntregas.mapper.ObjectMapper.parseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,26 +18,28 @@ public class EntregaService {
 private EntregaRepository repository;
 
 
-public Entrega create(Entrega entrega){
-    return repository.save(entrega);
+public EntregaDTO create(EntregaDTO entrega){
+    var entity = parseObject(entrega, Entrega.class);
+    return parseObject(repository.save(entity), EntregaDTO.class);
 }
 
-public Entrega findById(Long id){
-   return repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("entrega nao encontrada"));
+public EntregaDTO findById(Long id){
+  var entity = repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("entrega nao encontrada"));
+  return parseObject(entity, EntregaDTO.class);
 }
 
-public List<Entrega> findAll(){
-    return  repository.findAll();
+public List<EntregaDTO> findAll(){
+    return  parseListObjects(repository.findAll(), EntregaDTO.class);
 }
 
-public Entrega update(Long id, Entrega novaentrega){
-  Entrega oldEntrega = findById(id);
+public EntregaDTO update(Long id, EntregaDTO novaentrega){
+  Entrega oldEntrega = repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("entrega nao encontrada"));
   oldEntrega.setDataEntrega(novaentrega.getDataEntrega());
   oldEntrega.setEndereco(novaentrega.getEndereco());
   oldEntrega.setNomeCliente(novaentrega.getNomeCliente());
   oldEntrega.setNumeroCliente(novaentrega.getNumeroCliente());
   oldEntrega.setItems(novaentrega.getItems());
-  return repository.save(oldEntrega);
+  return parseObject(repository.save(oldEntrega), EntregaDTO.class);
 }
 
 public void delete(Long id){
