@@ -2,12 +2,14 @@ package com.Gustavo.AgendaEntregas.data.dto;
 
 
 
+import org.springframework.hateoas.RepresentationModel;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 
-public class EntregaDTO implements Serializable {
+public class EntregaDTO extends RepresentationModel<EntregaDTO> implements Serializable {
 
 private static final long SerialVersionUID = 1L;
 

@@ -6,6 +6,7 @@ import com.Gustavo.AgendaEntregas.data.dto.EntregaDTO;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.attribute.standard.Media;
@@ -39,8 +40,9 @@ public EntregaDTO update(@PathVariable Long id, @RequestBody EntregaDTO entrega)
 }
 
 @DeleteMapping(value = "/{id}")
-public void delete(@PathVariable Long id){
+public ResponseEntity<?> delete(@PathVariable Long id){
     service.delete(id);
+    return ResponseEntity.noContent().build();
 }
 
 
