@@ -1,4 +1,4 @@
-package com.Gustavo.AgendaEntregas.Exception.handler;
+package com.Gustavo.AgendaEntregas.Exception;
 
 import java.util.Date;
 

@@ -1,6 +1,7 @@
 package com.Gustavo.AgendaEntregas.Service;
 
 import com.Gustavo.AgendaEntregas.Controller.EntregaController;
+import com.Gustavo.AgendaEntregas.Exception.RequiredObjectIsNullException;
 import com.Gustavo.AgendaEntregas.Exception.ResourceNotFoundException;
 import com.Gustavo.AgendaEntregas.Model.Entrega;
 import com.Gustavo.AgendaEntregas.Repository.EntregaRepository;
@@ -23,6 +24,9 @@ private EntregaRepository repository;
 
 
 public EntregaDTO create(EntregaDTO entrega){
+
+    if(entrega == null) throw new RequiredObjectIsNullException();
+
     var entity = parseObject(entrega, Entrega.class);
     var dto =  parseObject(repository.save(entity), EntregaDTO.class);
     addHateoasLinks(dto);
@@ -45,6 +49,7 @@ public List<EntregaDTO> findAll(){
 }
 
 public EntregaDTO update(Long id, EntregaDTO novaentrega){
+  if(novaentrega == null) throw new RequiredObjectIsNullException();
   Entrega oldEntrega = repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("entrega nao encontrada"));
   oldEntrega.setDataEntrega(novaentrega.getDataEntrega());
   oldEntrega.setEndereco(novaentrega.getEndereco());

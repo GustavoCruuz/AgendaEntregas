@@ -47,14 +47,14 @@ public class MockEntrega {
     }
 
     public EntregaDTO mockDTO(Integer number) {
-        EntregaDTO Entrega = new EntregaDTO();
-        Entrega.setItems("Item" + number);
-        Entrega.setNomeCliente("nomeCliente" + number);
-        Entrega.setId(number.longValue());
-        Entrega.setNumeroCliente(number.longValue());
-        Entrega.setDataEntrega(LocalDateTime.now());
-        Entrega.setEndereco("Endereco" + number);
-        return Entrega;
+        EntregaDTO entrega = new EntregaDTO();
+        entrega.setItems("Item" + number);
+        entrega.setNomeCliente("nomeCliente" + number);
+        entrega.setId(number.longValue());
+        entrega.setNumeroCliente(number.longValue());
+        entrega.setDataEntrega(LocalDateTime.now());
+        entrega.setEndereco("Endereco" + number);
+        return entrega;
     }
 
 }

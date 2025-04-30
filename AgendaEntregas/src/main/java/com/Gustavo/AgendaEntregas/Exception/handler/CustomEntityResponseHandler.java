@@ -1,5 +1,7 @@
 package com.Gustavo.AgendaEntregas.Exception.handler;
 
+import com.Gustavo.AgendaEntregas.Exception.ExceptionResponse;
+import com.Gustavo.AgendaEntregas.Exception.RequiredObjectIsNullException;
 import com.Gustavo.AgendaEntregas.Exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,11 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(RequiredObjectIsNullException.class)
+    public final ResponseEntity<ExceptionResponse> handleBarRequestExceptions(Exception ex, WebRequest request){
+        ExceptionResponse response = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false) );
 
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 
 }
