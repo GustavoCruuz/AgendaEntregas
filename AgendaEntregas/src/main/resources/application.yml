@@ -13,3 +13,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false
+spring-doc:
+  paths-to-match: /entrega/**
+  swagger-ui:
+    use-root-path: true
