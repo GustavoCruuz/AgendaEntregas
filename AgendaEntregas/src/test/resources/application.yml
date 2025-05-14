@@ -2,7 +2,7 @@ cors:
   originPatterns: http://localhost:8080
 spring:
   application:
-   name: AgendaEntregas
+    name: AgendaEntregas
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/AgendamentoEntrega_db

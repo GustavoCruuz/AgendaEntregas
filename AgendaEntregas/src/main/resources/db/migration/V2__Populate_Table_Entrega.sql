@@ -42,4 +42,3 @@ ALTER TABLE ONLY public.entrega
 --
 -- PostgreSQL database dump complete
 --
-
