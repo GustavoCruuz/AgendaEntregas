@@ -44,6 +44,12 @@ public EntregaDTO update(@PathVariable Long id, @RequestBody EntregaDTO entrega)
     return service.update(id, entrega);
 }
 
+@PatchMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_YAML_VALUE})
+@Override
+public EntregaDTO finalizaEntrega(@PathVariable("id") Long id) {
+ return service.finalizaEntrega(id);
+}
+
 @DeleteMapping(value = "/{id}")
 @Override
 public ResponseEntity<?> delete(@PathVariable Long id){

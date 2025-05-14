@@ -20,7 +20,7 @@ private Long numeroCliente;
 private String endereco;
 private LocalDateTime dataEntrega;
 private String items;
-
+private Boolean finalizada;
 
     public Long getId() {
         return id;
@@ -70,17 +70,26 @@ private String items;
         this.numeroCliente = numeroCliente;
     }
 
+    public Boolean getFinalizada() {
+        return finalizada;
+    }
+
+    public void setFinalizada(Boolean finalizada) {
+        this.finalizada = finalizada;
+    }
+
     public EntregaDTO() {
     }
 
-@Override
-public boolean equals(Object o) {
-        if (!(o instanceof EntregaDTO entrega)) return false;
-        return Objects.equals(getId(), entrega.getId()) && Objects.equals(getNomeCliente(), entrega.getNomeCliente()) && Objects.equals(getNumeroCliente(), entrega.getNumeroCliente()) && Objects.equals(getEndereco(), entrega.getEndereco()) && Objects.equals(getDataEntrega(), entrega.getDataEntrega());
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof EntregaDTO that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getNomeCliente(), that.getNomeCliente()) && Objects.equals(getNumeroCliente(), that.getNumeroCliente()) && Objects.equals(getEndereco(), that.getEndereco()) && Objects.equals(getDataEntrega(), that.getDataEntrega()) && Objects.equals(getItems(), that.getItems()) && Objects.equals(getFinalizada(), that.getFinalizada());
     }
 
-@Override
-public int hashCode() {
-        return Objects.hash(getId(), getNomeCliente(), getNumeroCliente(), getEndereco(), getDataEntrega());
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getId(), getNomeCliente(), getNumeroCliente(), getEndereco(), getDataEntrega(), getItems(), getFinalizada());
     }
 }

@@ -38,20 +38,21 @@ private LocalDateTime dataEntrega;
 @Column(name = "items", nullable = false)
 private String items;
 
-
+@Column(name = "finalizada", nullable = false)
+private Boolean finalizada;
 
 
 public Entrega() {
     }
 
-@Override
-public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (!(o instanceof Entrega entrega)) return false;
-        return Objects.equals(getId(), entrega.getId()) && Objects.equals(getNomeCliente(), entrega.getNomeCliente()) && Objects.equals(getNumeroCliente(), entrega.getNumeroCliente()) && Objects.equals(getEndereco(), entrega.getEndereco()) && Objects.equals(getDataEntrega(), entrega.getDataEntrega());
+        return Objects.equals(getId(), entrega.getId()) && Objects.equals(getNomeCliente(), entrega.getNomeCliente()) && Objects.equals(getNumeroCliente(), entrega.getNumeroCliente()) && Objects.equals(getEndereco(), entrega.getEndereco()) && Objects.equals(getDataEntrega(), entrega.getDataEntrega()) && Objects.equals(getItems(), entrega.getItems()) && Objects.equals(getFinalizada(), entrega.getFinalizada());
     }
 
-@Override
-public int hashCode() {
-        return Objects.hash(getId(), getNomeCliente(), getNumeroCliente(), getEndereco(), getDataEntrega());
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNomeCliente(), getNumeroCliente(), getEndereco(), getDataEntrega(), getItems(), getFinalizada());
     }
 }

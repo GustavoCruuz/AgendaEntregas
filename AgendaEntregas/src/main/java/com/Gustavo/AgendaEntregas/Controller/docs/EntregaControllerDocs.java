@@ -57,6 +57,17 @@ public interface EntregaControllerDocs {
     })
     EntregaDTO update(@PathVariable Long id, @RequestBody EntregaDTO entrega);
 
+    @Operation(summary = "Ending Deliveries by its id", description = "Ending one Deliverie", tags = {"Deliveries"}, responses = {@ApiResponse(description = "Succes", responseCode = "200", content = @Content(schema = @Schema(implementation = EntregaDTO.class))),
+            @ApiResponse(description = "Succes", responseCode = "200", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(schema = @Schema(implementation = EntregaDTO.class)))}),
+            @ApiResponse(description = "No content", responseCode = "204", content = @Content),
+            @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+            @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+            @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+            @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+
+    })
+    EntregaDTO finalizaEntrega(@PathVariable("id") Long id);
+
     @Operation(summary = "Delete Deliverie", description = "Delete one Deliverie", tags = {"Deliveries"}, responses = {@ApiResponse(description = "Succes", responseCode = "200", content = @Content(schema = @Schema(implementation = EntregaDTO.class))),
             @ApiResponse(description = "Succes", responseCode = "200", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(schema = @Schema(implementation = EntregaDTO.class)))}),
             @ApiResponse(description = "No content", responseCode = "204", content = @Content),
@@ -67,4 +78,7 @@ public interface EntregaControllerDocs {
 
     })
     ResponseEntity<?> delete(@PathVariable Long id);
+
+
+
 }

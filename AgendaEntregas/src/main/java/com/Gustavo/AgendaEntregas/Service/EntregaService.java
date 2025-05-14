@@ -8,6 +8,8 @@ import com.Gustavo.AgendaEntregas.Repository.EntregaRepository;
 import com.Gustavo.AgendaEntregas.data.dto.EntregaDTO;
 import static com.Gustavo.AgendaEntregas.mapper.ObjectMapper.parseListObjects;
 import static com.Gustavo.AgendaEntregas.mapper.ObjectMapper.parseObject;
+
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -66,12 +68,23 @@ public void delete(Long id){
     repository.deleteById(id);
 }
 
+@Transactional
+public EntregaDTO finalizaEntrega(Long id){
+    repository.findById(id);
+    repository.finalizarEntrega(id);
+    var entity = repository.findById(id).get();
+    var dto = parseObject(entity, EntregaDTO.class);
+    addHateoasLinks(dto);
+    return dto;
+}
+
 
     private void addHateoasLinks(EntregaDTO dto) {
         dto.add(linkTo(methodOn(EntregaController.class).create(dto)).withRel("create").withType("Post"));
         dto.add(linkTo(methodOn(EntregaController.class).findAll()).withRel("findAll").withType("Get"));
         dto.add(linkTo(methodOn(EntregaController.class).findById(dto.getId())).withSelfRel().withType("Get"));
         dto.add(linkTo(methodOn(EntregaController.class).update(dto.getId(), dto)).withRel("update").withType("Put"));
+        dto.add(linkTo(methodOn(EntregaController.class).finalizaEntrega(dto.getId())).withRel("finaliza").withType("PATCH"));
         dto.add(linkTo(methodOn(EntregaController.class).delete(dto.getId())).withRel("delete").withType("DELETE"));
     }
 
